@@ -1,12 +1,138 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from "react";
+import QuizProgress from "@/components/QuizProgress";
+import QuizOption from "@/components/QuizOption";
+import LoadingScreen from "@/components/LoadingScreen";
+import ResultScreen from "@/components/ResultScreen";
+import { Sparkles } from "lucide-react";
+
+const questions = [
+  {
+    id: 1,
+    title: "Nível de Conhecimento",
+    question: "Você já sabia que é possível criar influenciadores 100% digitais que vendem no TikTok Shop sem precisar aparecer?",
+    options: [
+      { label: "Sim, mas não sei como fazer.", recommended: false },
+      { label: "Não, achei que eram pessoas reais.", recommended: false },
+    ],
+  },
+  {
+    id: 2,
+    title: "Objetivo Financeiro",
+    question: "Quanto você busca gerar de renda extra mensal utilizando ferramentas de Inteligência Artificial?",
+    options: [
+      { label: "De R$ 1.000 a R$ 3.000", recommended: false },
+      { label: "De R$ 5.000 a R$ 10.000", recommended: false },
+      { label: "Mais de R$ 15.000", recommended: false },
+    ],
+  },
+  {
+    id: 3,
+    title: "Disponibilidade",
+    question: "Quanto tempo você tem disponível para dedicar ao seu negócio de Avatares de IA por dia?",
+    options: [
+      { label: "Menos de 1 hora.", recommended: false },
+      { label: "1 a 2 horas (Ideal).", recommended: true },
+      { label: "Mais de 3 horas.", recommended: false },
+    ],
+  },
+  {
+    id: 4,
+    title: "Perfil de Executor",
+    question: "Você prefere criar o seu próprio rosto digital ou prefere copiar os modelos que já estão validados e vendendo?",
+    options: [
+      { label: "Criar o meu do zero.", recommended: false },
+      { label: "Usar modelos já validados (Recomendado).", recommended: true },
+    ],
+  },
+];
+
+type Phase = "quiz" | "loading" | "result";
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+  const [currentQ, setCurrentQ] = useState(0);
+  const [answers, setAnswers] = useState<(number | null)[]>(new Array(questions.length).fill(null));
+  const [phase, setPhase] = useState<Phase>("quiz");
+
+  const selectAnswer = (optIndex: number) => {
+    const newAnswers = [...answers];
+    newAnswers[currentQ] = optIndex;
+    setAnswers(newAnswers);
+  };
+
+  const next = () => {
+    if (answers[currentQ] === null) return;
+    if (currentQ < questions.length - 1) {
+      setCurrentQ(currentQ + 1);
+    } else {
+      setPhase("loading");
+    }
+  };
+
+  const handleLoadingComplete = useCallback(() => {
+    setPhase("result");
+  }, []);
+
+  if (phase === "loading") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <LoadingScreen onComplete={handleLoadingComplete} />
       </div>
+    );
+  }
+
+  if (phase === "result") {
+    return (
+      <div className="min-h-screen bg-background">
+        <ResultScreen />
+      </div>
+    );
+  }
+
+  const q = questions[currentQ];
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="px-5 pt-6 pb-4">
+        <div className="flex items-center gap-2 mb-5">
+          <Sparkles className="w-5 h-5 text-primary" />
+          <span className="text-sm font-bold text-primary tracking-wider uppercase">Quiz • Carreira com IA</span>
+        </div>
+        <QuizProgress current={currentQ + 1} total={questions.length} />
+      </header>
+
+      {/* Question */}
+      <main className="flex-1 px-5 py-4 flex flex-col">
+        <span className="text-xs font-semibold text-primary mb-2 uppercase tracking-wider">{q.title}</span>
+        <h2 className="text-lg font-bold text-foreground leading-snug mb-6">
+          {q.question}
+        </h2>
+
+        <div className="space-y-3 flex-1">
+          {q.options.map((opt, i) => (
+            <QuizOption
+              key={i}
+              label={opt.label}
+              selected={answers[currentQ] === i}
+              recommended={opt.recommended}
+              onClick={() => selectAnswer(i)}
+            />
+          ))}
+        </div>
+
+        {/* Next button */}
+        <button
+          onClick={next}
+          disabled={answers[currentQ] === null}
+          className={`w-full py-4 rounded-2xl font-bold text-base transition-all mt-6 mb-4 ${
+            answers[currentQ] !== null
+              ? "quiz-gradient text-primary-foreground glow-primary active:scale-95"
+              : "bg-muted text-muted-foreground cursor-not-allowed"
+          }`}
+        >
+          {currentQ < questions.length - 1 ? "Próxima →" : "Ver Resultado"}
+        </button>
+      </main>
     </div>
   );
 };
