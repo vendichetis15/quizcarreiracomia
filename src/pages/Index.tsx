@@ -6,46 +6,46 @@ import ResultScreen from "@/components/ResultScreen";
 import { Bot } from "lucide-react";
 
 const questions = [
-  {
-    id: 1,
-    title: "Conexão com o Criativo",
-    question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a que te trouxe até aqui?",
-    options: [
-      { label: "Sim, já estou acompanhando essa revolução." },
-      { label: "Não, fiquei impressionado com o realismo." },
-      { label: "Vi algo parecido, mas não sabia que era IA." },
-    ],
-  },
-  {
-    id: 2,
-    title: "Identificação da Dor",
-    question: "Qual o seu maior receio em relação ao avanço acelerado da IA no mercado de trabalho?",
-    options: [
-      { label: "Ser substituído e perder minha fonte de renda." },
-      { label: "Ficar estagnado enquanto outros ganham mais usando IA." },
-      { label: "Não conseguir aprender a tempo de me destacar." },
-    ],
-  },
-  {
-    id: 3,
-    title: "Qualificação de Desejo",
-    question: "Se você dominasse as ferramentas que automatizam 80% do seu trabalho hoje, o que você faria?",
-    options: [
-      { label: "Buscaria um cargo de liderança com salário maior." },
-      { label: "Criaria meu próprio negócio digital do zero." },
-      { label: "Prestaria serviços para empresas de fora ganhando em dólar." },
-    ],
-  },
-  {
-    id: 4,
-    title: "Micro-comprometimento",
-    question: "Você está disposto a dedicar 15 minutos agora para entender o método exato que gerou 6 digitos se precisar contratar modelos reais?",
-    options: [
-      { label: "Sim, quero o acesso imediato." },
-      { label: "Com certeza, não quero perder essa chance." },
-    ],
-  },
-];
+{
+  id: 1,
+  title: "Conexão com o Criativo",
+  question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a que te trouxe até aqui?",
+  options: [
+  { label: "Sim, já estou acompanhando essa revolução." },
+  { label: "Não, fiquei impressionado com o realismo." },
+  { label: "Vi algo parecido, mas não sabia que era IA." }]
+
+},
+{
+  id: 2,
+  title: "Identificação da Dor",
+  question: "Qual o seu maior receio em relação ao avanço acelerado da IA no mercado de trabalho?",
+  options: [
+  { label: "Ser substituído e perder minha fonte de renda." },
+  { label: "Ficar estagnado enquanto outros ganham mais usando IA." },
+  { label: "Não conseguir aprender a tempo de me destacar." }]
+
+},
+{
+  id: 3,
+  title: "Qualificação de Desejo",
+  question: "Se você dominasse as ferramentas que automatizam 80% do seu trabalho hoje, o que você faria?",
+  options: [
+  { label: "Buscaria um cargo de liderança com salário maior." },
+  { label: "Criaria meu próprio negócio digital do zero." },
+  { label: "Prestaria serviços para empresas de fora ganhando em dólar." }]
+
+},
+{
+  id: 4,
+  title: "Micro-comprometimento",
+  question: "Você está disposto a dedicar 15 minutos agora para entender o método exato que gerou 6 digitos se precisar contratar modelos reais?",
+  options: [
+  { label: "Sim, quero o acesso imediato." },
+  { label: "Com certeza, não quero perder essa chance." }]
+
+}];
+
 
 type Phase = "quiz" | "loading" | "result";
 
@@ -77,16 +77,16 @@ const Index = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <LoadingScreen onComplete={handleLoadingComplete} />
-      </div>
-    );
+      </div>);
+
   }
 
   if (phase === "result") {
     return (
       <div className="min-h-screen bg-background">
         <ResultScreen />
-      </div>
-    );
+      </div>);
+
   }
 
   const q = questions[currentQ];
@@ -110,20 +110,20 @@ const Index = () => {
 
       {/* Question */}
       <main className="flex-1 px-5 py-4 flex flex-col">
-        <span className="text-xs font-semibold text-primary mb-2 uppercase tracking-wider">{q.title}</span>
+        
         <h2 className="text-lg font-bold text-foreground leading-snug mb-6">
           {q.question}
         </h2>
 
         <div className="space-y-3 flex-1">
-          {q.options.map((opt, i) => (
-            <QuizOption
-              key={i}
-              label={opt.label}
-              selected={answers[currentQ] === i}
-              onClick={() => selectAnswer(i)}
-            />
-          ))}
+          {q.options.map((opt, i) =>
+          <QuizOption
+            key={i}
+            label={opt.label}
+            selected={answers[currentQ] === i}
+            onClick={() => selectAnswer(i)} />
+
+          )}
         </div>
 
         {/* Next button */}
@@ -131,16 +131,16 @@ const Index = () => {
           onClick={next}
           disabled={answers[currentQ] === null}
           className={`w-full py-4 rounded-2xl font-bold text-base transition-all mt-6 mb-4 ${
-            answers[currentQ] !== null
-              ? "quiz-gradient text-primary-foreground glow-primary active:scale-95"
-              : "bg-muted text-muted-foreground cursor-not-allowed"
-          }`}
-        >
+          answers[currentQ] !== null ?
+          "quiz-gradient text-primary-foreground glow-primary active:scale-95" :
+          "bg-muted text-muted-foreground cursor-not-allowed"}`
+          }>
+
           {currentQ < questions.length - 1 ? "Próxima →" : "Ver Resultado"}
         </button>
       </main>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Index;
