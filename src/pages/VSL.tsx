@@ -15,7 +15,7 @@ const VSL = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-start px-4 py-10 animate-fade-in">
-      <div className="w-full max-w-2xl space-y-6 text-center">
+      <div className="w-full max-w-sm space-y-6 text-center">
         <h1 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
           Aprenda a lucrar de 500 a 1000 reais por dia no TikTok Shop com{" "}
           <span className="text-primary">Influenciadores IA</span>
@@ -36,7 +36,7 @@ const VSL = () => {
             style={{ margin: "0 auto", width: "100%" }}
           >
             <div
-              style={{ padding: "56.25% 0 0 0", position: "relative" }}
+              style={{ padding: "122% 0 0 0", position: "relative" }}
             >
               <iframe
                 id="ifr_69963cfbe72b943e07e7b685"
