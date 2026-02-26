@@ -39,7 +39,7 @@ const questions = [
   {
     id: 4,
     title: "Micro-comprometimento",
-    question: "Você está disposto a dedicar 15 minutos agora para entender o método exato que gerou R$ 100 mil sem contratar modelos reais?",
+    question: "Você está disposto a dedicar 15 minutos agora para entender o método exato que gerou 6 digitos se precisar contratar modelos reais?",
     options: [
       { label: "Sim, quero o acesso imediato." },
       { label: "Com certeza, não quero perder essa chance." },
