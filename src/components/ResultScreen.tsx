@@ -46,7 +46,6 @@ const ResultScreen = () => {
       <>
           <a
           href={AFFILIATE_LINK}
-          target="_blank"
           rel="noopener noreferrer"
           className="w-full max-w-sm block animate-fade-in">
 
