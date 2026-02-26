@@ -3,45 +3,46 @@ import QuizProgress from "@/components/QuizProgress";
 import QuizOption from "@/components/QuizOption";
 import LoadingScreen from "@/components/LoadingScreen";
 import ResultScreen from "@/components/ResultScreen";
-import { Sparkles } from "lucide-react";
+import { Bot } from "lucide-react";
 
 const questions = [
   {
     id: 1,
-    title: "Nível de Conhecimento",
-    question: "Você já sabia que é possível criar influenciadores 100% digitais que vendem no TikTok Shop sem precisar aparecer?",
+    title: "Conexão com o Criativo",
+    question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a que te trouxe até aqui?",
     options: [
-      { label: "Sim, mas não sei como fazer.", recommended: false },
-      { label: "Não, achei que eram pessoas reais.", recommended: false },
+      { label: "Sim, já estou acompanhando essa revolução." },
+      { label: "Não, fiquei impressionado com o realismo." },
+      { label: "Vi algo parecido, mas não sabia que era IA." },
     ],
   },
   {
     id: 2,
-    title: "Objetivo Financeiro",
-    question: "Quanto você busca gerar de renda extra mensal utilizando ferramentas de Inteligência Artificial?",
+    title: "Identificação da Dor",
+    question: "Qual o seu maior receio em relação ao avanço acelerado da IA no mercado de trabalho?",
     options: [
-      { label: "De R$ 1.000 a R$ 3.000", recommended: false },
-      { label: "De R$ 5.000 a R$ 10.000", recommended: false },
-      { label: "Mais de R$ 15.000", recommended: false },
+      { label: "Ser substituído e perder minha fonte de renda." },
+      { label: "Ficar estagnado enquanto outros ganham mais usando IA." },
+      { label: "Não conseguir aprender a tempo de me destacar." },
     ],
   },
   {
     id: 3,
-    title: "Disponibilidade",
-    question: "Quanto tempo você tem disponível para dedicar ao seu negócio de Avatares de IA por dia?",
+    title: "Qualificação de Desejo",
+    question: "Se você dominasse as ferramentas que automatizam 80% do seu trabalho hoje, o que você faria?",
     options: [
-      { label: "Menos de 1 hora.", recommended: false },
-      { label: "1 a 2 horas (Ideal).", recommended: true },
-      { label: "Mais de 3 horas.", recommended: false },
+      { label: "Buscaria um cargo de liderança com salário maior." },
+      { label: "Criaria meu próprio negócio digital do zero." },
+      { label: "Prestaria serviços para empresas de fora ganhando em dólar." },
     ],
   },
   {
     id: 4,
-    title: "Perfil de Executor",
-    question: "Você prefere criar o seu próprio rosto digital ou prefere copiar os modelos que já estão validados e vendendo?",
+    title: "Micro-comprometimento",
+    question: "Você está disposto a dedicar 15 minutos agora para entender o método exato que gerou R$ 100 mil sem contratar modelos reais?",
     options: [
-      { label: "Criar o meu do zero.", recommended: false },
-      { label: "Usar modelos já validados (Recomendado).", recommended: true },
+      { label: "Sim, quero o acesso imediato." },
+      { label: "Com certeza, não quero perder essa chance." },
     ],
   },
 ];
@@ -94,11 +95,17 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <header className="px-5 pt-6 pb-4">
-        <div className="flex items-center gap-2 mb-5">
-          <Sparkles className="w-5 h-5 text-primary" />
-          <span className="text-sm font-bold text-primary tracking-wider uppercase">Quiz • Carreira com IA</span>
+        <div className="flex items-center gap-2 mb-2">
+          <Bot className="w-5 h-5 text-primary" />
+          <span className="text-xs font-bold text-primary tracking-widest uppercase">Diagnóstico de Carreira • 2026</span>
         </div>
-        <QuizProgress current={currentQ + 1} total={questions.length} />
+        <h1 className="text-base font-bold text-foreground leading-snug mb-1">
+          Descubra em 30 segundos se você será substituído por IA ou se faz parte dos{" "}
+          <span className="text-primary">3% que vão lucrar alto</span> com ela.
+        </h1>
+        <div className="mt-4">
+          <QuizProgress current={currentQ + 1} total={questions.length} />
+        </div>
       </header>
 
       {/* Question */}
@@ -114,7 +121,6 @@ const Index = () => {
               key={i}
               label={opt.label}
               selected={answers[currentQ] === i}
-              recommended={opt.recommended}
               onClick={() => selectAnswer(i)}
             />
           ))}

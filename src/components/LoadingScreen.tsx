@@ -4,15 +4,23 @@ interface LoadingScreenProps {
   onComplete: () => void;
 }
 
+const steps = [
+  "Analisando suas respostas...",
+  "Verificando compatibilidade de mercado...",
+  "Cruzando dados com tendências de 2026...",
+  "RESULTADO: 98% de Compatibilidade encontrada!",
+];
+
 const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
+  const [stepIndex, setStepIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((p) => {
         if (p >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 300);
+          setTimeout(onComplete, 600);
           return 100;
         }
         return p + 2;
@@ -21,6 +29,13 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
     return () => clearInterval(interval);
   }, [onComplete]);
 
+  useEffect(() => {
+    if (progress < 25) setStepIndex(0);
+    else if (progress < 55) setStepIndex(1);
+    else if (progress < 85) setStepIndex(2);
+    else setStepIndex(3);
+  }, [progress]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8 px-6">
       {/* Circular loader */}
@@ -28,7 +43,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         <svg className="w-full h-full animate-spin-slow" viewBox="0 0 100 100">
           <circle
             cx="50" cy="50" r="42"
-            stroke="hsl(240 8% 18%)"
+            stroke="hsl(var(--muted))"
             strokeWidth="6"
             fill="none"
           />
@@ -53,11 +68,15 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         </div>
       </div>
 
-      <div className="text-center space-y-2">
-        <h2 className="text-xl font-bold text-foreground">Analisando Perfil...</h2>
-        <p className="text-sm text-muted-foreground">
-          Processando suas respostas com IA
-        </p>
+      <div className="text-center space-y-3">
+        <h2 className="text-xl font-bold text-foreground">{steps[stepIndex]}</h2>
+        <div className="flex flex-col gap-1">
+          {steps.slice(0, stepIndex + 1).map((s, i) => (
+            <p key={i} className={`text-xs transition-all duration-300 ${i === stepIndex ? "text-primary font-semibold" : "text-muted-foreground"}`}>
+              {i < stepIndex ? "✅ " : "⏳ "}{s}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
