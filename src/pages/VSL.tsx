@@ -46,8 +46,10 @@ const VSL = () => {
     <div className="min-h-screen bg-background flex flex-col items-center justify-start px-4 py-10 animate-fade-in">
       <div className="w-full max-w-sm space-y-6 text-center">
         <h1 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
-          Aprenda a lucrar de 500 a 1000 reais por dia no TikTok Shop com{" "}
-          <span className="text-primary">Influenciadores IA</span>
+          <span className="text-primary">Diagnóstico Concluído:</span> Seu perfil foi{" "}
+          <span className="text-primary">aprovado</span> para o{" "}
+          <span className="text-primary">Plano 10K</span> em{" "}
+          <span className="text-primary">30 dias</span>
         </h1>
 
         <p className="text-base text-muted-foreground font-medium">
