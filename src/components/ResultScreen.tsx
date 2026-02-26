@@ -32,9 +32,9 @@ const ResultScreen = () => {
           <ShieldCheck className="w-4 h-4 text-primary" />
           <span className="text-xs font-semibold text-primary uppercase tracking-wider">Depoimento</span>
         </div>
-        <p className="text-sm text-foreground/90 leading-relaxed italic">
-          "Eu faturei R$ 100k no TikTok Shop, mas parei tudo para focar nessa nova tecnologia de Avatares.
-          Veja por que..."
+        <p className="text-sm text-foreground/90 leading-relaxed italic">"Eu até gerei uma boa grana no TikTok Shop, mas parei tudo para focar nessa nova tecnologia de Influenciadores IA. Veja por que..."
+
+
         </p>
       </div>
 
