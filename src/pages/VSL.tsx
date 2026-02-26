@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 const VSL = () => {
-  const [showArrow, setShowArrow] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [showCTA, setShowCTA] = useState(false);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -11,32 +10,26 @@ const VSL = () => {
     script.async = true;
     document.head.appendChild(script);
 
-    const startTime = Date.now();
-    const totalDuration = 679000;
-    const acceleratedPhase = 180000;
+    // Aguarda o player carregar
+    const checkPlayer = setInterval(() => {
+      if (window.smartplayer) {
+        const player = window.smartplayer.instances?.[0];
 
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
+        if (player) {
+          clearInterval(checkPlayer);
 
-      if (elapsed >= totalDuration) {
-        setProgress(100);
-        setShowArrow(true);
-        clearInterval(interval);
-      } else if (elapsed <= acceleratedPhase) {
-        const acceleratedProgress = (elapsed / acceleratedPhase) * 45;
-        setProgress(acceleratedProgress);
-      } else {
-        const remainingTime = elapsed - acceleratedPhase;
-        const remainingDuration = totalDuration - acceleratedPhase;
-        const naturalProgress =
-          45 + (remainingTime / remainingDuration) * 55;
-        setProgress(Math.min(naturalProgress, 100));
+          // Evento quando o vídeo termina
+          player.on("ended", () => {
+            setShowCTA(true);
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          });
+        }
       }
-    }, 100);
+    }, 500);
 
     return () => {
       document.head.removeChild(script);
-      clearInterval(interval);
+      clearInterval(checkPlayer);
     };
   }, []);
 
@@ -59,14 +52,7 @@ const VSL = () => {
         </p>
 
         {/* Vídeo */}
-        <div className="w-full rounded-2xl overflow-visible border border-border relative">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800/20 z-50">
-            <div
-              className="h-full bg-purple-500 transition-all duration-100"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
+        <div className="w-full rounded-2xl overflow-hidden border border-border">
           <div
             id="ifr_69963cfbe72b943e07e7b685_wrapper"
             style={{ margin: "0 auto", width: "100%" }}
@@ -91,21 +77,13 @@ const VSL = () => {
           </div>
         </div>
 
-        {!showArrow && (
-          <div className="flex flex-col items-center gap-3">
-            <p className="text-xs text-muted-foreground">
-              Vídeo em reprodução...
-            </p>
-            <button
-              onClick={() => setShowArrow(true)}
-              className="text-xs text-primary underline"
-            >
-              Já assisti, quero garantir minha vaga agora...
-            </button>
-          </div>
+        {!showCTA && (
+          <p className="text-xs text-muted-foreground">
+            Assista até o final para liberar sua vaga exclusiva...
+          </p>
         )}
 
-        {showArrow && (
+        {showCTA && (
           <>
             <div className="flex flex-col items-center gap-2">
               <div className="animate-bounce">
@@ -128,7 +106,6 @@ const VSL = () => {
               </p>
             </div>
 
-            {/* BOTÃO COM SEU LINK DE AFILIADO */}
             <a
               href="https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf"
               target="_blank"
