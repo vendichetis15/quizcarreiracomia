@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const VSL = () => {
   const [showArrow, setShowArrow] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     // Load the Converte AI smart player script
@@ -10,14 +11,34 @@ const VSL = () => {
     script.async = true;
     document.head.appendChild(script);
 
-    // Show arrow after video ends (11:19 minutes = 679 seconds)
-    const timer = setTimeout(() => {
-      setShowArrow(true);
-    }, 679000);
+    const startTime = Date.now();
+    const totalDuration = 679000; // 11:19 em ms
+    const acceleratedPhase = 180000; // Primeiros 3 minutos
+
+    // Atualizar progresso a cada 100ms
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      
+      if (elapsed >= totalDuration) {
+        setProgress(100);
+        setShowArrow(true);
+        clearInterval(interval);
+      } else if (elapsed <= acceleratedPhase) {
+        // Primeiros 3 minutos: progride rápido até 45%
+        const acceleratedProgress = (elapsed / acceleratedPhase) * 45;
+        setProgress(acceleratedProgress);
+      } else {
+        // Depois de 3 minutos: progride naturalmente de 45% a 100%
+        const remainingTime = elapsed - acceleratedPhase;
+        const remainingDuration = totalDuration - acceleratedPhase;
+        const naturalProgress = 45 + (remainingTime / remainingDuration) * 55;
+        setProgress(Math.min(naturalProgress, 100));
+      }
+    }, 100);
 
     return () => {
       document.head.removeChild(script);
-      clearTimeout(timer);
+      clearInterval(interval);
     };
   }, []);
 
@@ -38,7 +59,17 @@ const VSL = () => {
         </p>
 
         {/* Smart Player Video Embed */}
-        <div className="w-full rounded-2xl overflow-hidden border border-border">
+        <div className="w-full rounded-2xl overflow-hidden border border-border relative">
+          {/* Progress Bar Overlay */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800/20 z-10">
+            <div
+              className="h-full bg-purple-500 transition-all duration-100"
+              style={{
+                width: `${progress}%`,
+              }}
+            />
+          </div>
+
           <div
             id="ifr_69963cfbe72b943e07e7b685_wrapper"
             style={{ margin: "0 auto", width: "100%" }}
@@ -67,17 +98,7 @@ const VSL = () => {
 
         {/* Progress Bar while video is playing */}
         {!showArrow && (
-          <div className="w-full space-y-2">
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div
-                className="bg-primary h-2 rounded-full transition-all duration-1000"
-                style={{
-                  width: `${(Math.min(Date.now() - (Date.now() - 679000), 679000) / 679000) * 100}%`,
-                }}
-              />
-            </div>
-            <p className="text-xs text-muted-foreground text-center">Vídeo em reprodução...</p>
-          </div>
+          <p className="text-xs text-muted-foreground text-center">Vídeo em reprodução...</p>
         )}
 
         {/* Arrow pointing to CTA */}
