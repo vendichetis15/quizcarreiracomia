@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const VSL = () => {
+  const [showArrow, setShowArrow] = useState(false);
+
   useEffect(() => {
     // Load the Converte AI smart player script
     const script = document.createElement("script");
@@ -8,8 +10,14 @@ const VSL = () => {
     script.async = true;
     document.head.appendChild(script);
 
+    // Show arrow after video ends (approximately 5-6 seconds after page load based on video duration)
+    const timer = setTimeout(() => {
+      setShowArrow(true);
+    }, 6000);
+
     return () => {
       document.head.removeChild(script);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -56,6 +64,43 @@ const VSL = () => {
             </div>
           </div>
         </div>
+
+        {/* Arrow pointing to CTA */}
+        {showArrow && (
+          <div className="flex flex-col items-center gap-2">
+            <div className="animate-bounce">
+              <svg
+                className="w-8 h-8 text-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
+              </svg>
+            </div>
+            <p className="text-sm text-muted-foreground font-medium">
+              Clique abaixo para garantir sua vaga
+            </p>
+          </div>
+        )}
+
+        {/* CTA Button */}
+        {showArrow && (
+          <button
+            onClick={() => {
+              // Aqui você pode adicionar a ação desejada (redirecionar, abrir modal, etc)
+              console.log("CTA clicked");
+            }}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
+          >
+            GARANTIR MINHA VAGA AGORA
+          </button>
+        )}
       </div>
     </div>
   );
