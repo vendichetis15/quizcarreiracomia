@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 const VSL = () => {
   const [showArrow, setShowArrow] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
     // Load the Converte AI smart player script
