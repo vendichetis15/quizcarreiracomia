@@ -5,33 +5,31 @@ const VSL = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Load the Converte AI smart player script
     const script = document.createElement("script");
-    script.src = "https://scripts.converteai.net/5d9f8480-70ee-4640-ab7d-afc37958aa16/players/69963cfbe72b943e07e7b685/v4/player.js";
+    script.src =
+      "https://scripts.converteai.net/5d9f8480-70ee-4640-ab7d-afc37958aa16/players/69963cfbe72b943e07e7b685/v4/player.js";
     script.async = true;
     document.head.appendChild(script);
 
     const startTime = Date.now();
-    const totalDuration = 679000; // 11:19 em ms
-    const acceleratedPhase = 180000; // Primeiros 3 minutos
+    const totalDuration = 679000;
+    const acceleratedPhase = 180000;
 
-    // Atualizar progresso a cada 100ms
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
-      
+
       if (elapsed >= totalDuration) {
         setProgress(100);
         setShowArrow(true);
         clearInterval(interval);
       } else if (elapsed <= acceleratedPhase) {
-        // Primeiros 3 minutos: progride rápido até 45%
         const acceleratedProgress = (elapsed / acceleratedPhase) * 45;
         setProgress(acceleratedProgress);
       } else {
-        // Depois de 3 minutos: progride naturalmente de 45% a 100%
         const remainingTime = elapsed - acceleratedPhase;
         const remainingDuration = totalDuration - acceleratedPhase;
-        const naturalProgress = 45 + (remainingTime / remainingDuration) * 55;
+        const naturalProgress =
+          45 + (remainingTime / remainingDuration) * 55;
         setProgress(Math.min(naturalProgress, 100));
       }
     }, 100);
@@ -60,15 +58,12 @@ const VSL = () => {
           Mesmo começando do absoluto zero.
         </p>
 
-        {/* Smart Player Video Embed */}
+        {/* Vídeo */}
         <div className="w-full rounded-2xl overflow-visible border border-border relative">
-          {/* Progress Bar Overlay */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800/20 z-50">
             <div
               className="h-full bg-purple-500 transition-all duration-100"
-              style={{
-                width: `${progress}%`,
-              }}
+              style={{ width: `${progress}%` }}
             />
           </div>
 
@@ -76,9 +71,7 @@ const VSL = () => {
             id="ifr_69963cfbe72b943e07e7b685_wrapper"
             style={{ margin: "0 auto", width: "100%" }}
           >
-            <div
-              style={{ padding: "122% 0 0 0", position: "relative" }}
-            >
+            <div style={{ padding: "122% 0 0 0", position: "relative" }}>
               <iframe
                 id="ifr_69963cfbe72b943e07e7b685"
                 src="https://scripts.converteai.net/5d9f8480-70ee-4640-ab7d-afc37958aa16/players/69963cfbe72b943e07e7b685/embed.html"
@@ -98,54 +91,53 @@ const VSL = () => {
           </div>
         </div>
 
-        {/* Progress Bar while video is playing */}
         {!showArrow && (
           <div className="flex flex-col items-center gap-3">
-            <p className="text-xs text-muted-foreground text-center">Vídeo em reprodução...</p>
+            <p className="text-xs text-muted-foreground">
+              Vídeo em reprodução...
+            </p>
             <button
               onClick={() => setShowArrow(true)}
-              className="text-xs text-primary hover:text-primary/80 underline"
+              className="text-xs text-primary underline"
             >
               Já assisti, quero garantir minha vaga agora...
             </button>
           </div>
         )}
 
-        {/* Arrow pointing to CTA */}
         {showArrow && (
-          <div className="flex flex-col items-center gap-2">
-            <div className="animate-bounce">
-              <svg
-                className="w-8 h-8 text-primary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
+          <>
+            <div className="flex flex-col items-center gap-2">
+              <div className="animate-bounce">
+                <svg
+                  className="w-8 h-8 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Clique abaixo para garantir sua vaga
+              </p>
             </div>
-            <p className="text-sm text-muted-foreground font-medium">
-              Clique abaixo para garantir sua vaga
-            </p>
-          </div>
-        )}
 
-        {/* CTA Button */}
-        {showArrow && (
-          <button
-            onClick={() => {
-              // Aqui você pode adicionar a ação desejada (redirecionar, abrir modal, etc)
-              console.log("CTA clicked");
-            }}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
-          >
-            GARANTIR MINHA VAGA AGORA
-          </button>
+            {/* BOTÃO COM SEU LINK DE AFILIADO */}
+            <a
+              href="https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full block bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg text-center"
+            >
+              GARANTIR MINHA VAGA AGORA
+            </a>
+          </>
         )}
       </div>
     </div>
