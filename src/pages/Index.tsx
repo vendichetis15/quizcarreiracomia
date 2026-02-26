@@ -1,8 +1,7 @@
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import QuizProgress from "@/components/QuizProgress";
 import QuizOption from "@/components/QuizOption";
-import LoadingScreen from "@/components/LoadingScreen";
-import ResultScreen from "@/components/ResultScreen";
 import { Bot } from "lucide-react";
 
 const questions = [
@@ -53,6 +52,7 @@ const Index = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(new Array(questions.length).fill(null));
   const [phase, setPhase] = useState<Phase>("quiz");
+  const navigate = useNavigate();
 
   const selectAnswer = (optIndex: number) => {
     const newAnswers = [...answers];
@@ -65,7 +65,10 @@ const Index = () => {
     if (currentQ < questions.length - 1) {
       setCurrentQ(currentQ + 1);
     } else {
-      setPhase("loading");
+      navigate("/vsl");
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
     }
   };
 
