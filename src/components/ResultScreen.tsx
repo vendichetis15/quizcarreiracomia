@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CheckCircle, ShieldCheck } from "lucide-react";
+import { CheckCircle, ShieldCheck, ChevronDown } from "lucide-react";
 
 const AFFILIATE_LINK = "https://kiwify.app/U7sUyIQ?afid=bCH5tjUf";
 
@@ -33,8 +33,6 @@ const ResultScreen = () => {
           <span className="text-xs font-semibold text-primary uppercase tracking-wider">Depoimento</span>
         </div>
         <p className="text-sm text-foreground/90 leading-relaxed italic">"Eu até gerei uma boa grana no TikTok Shop, mas parei tudo para focar nessa nova tecnologia de Influenciadores IA. Veja por que..."
-
-
         </p>
       </div>
 
@@ -44,6 +42,7 @@ const ResultScreen = () => {
 
       {showButton ?
       <>
+          <ChevronDown className="w-8 h-8 text-primary animate-bounce animate-fade-in" />
           <a
           href={AFFILIATE_LINK}
           rel="noopener noreferrer"
