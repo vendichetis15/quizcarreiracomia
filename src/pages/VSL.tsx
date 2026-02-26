@@ -59,9 +59,9 @@ const VSL = () => {
         </p>
 
         {/* Smart Player Video Embed */}
-        <div className="w-full rounded-2xl overflow-hidden border border-border relative">
+        <div className="w-full rounded-2xl overflow-visible border border-border relative">
           {/* Progress Bar Overlay */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800/20 z-10">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800/20 z-50">
             <div
               className="h-full bg-purple-500 transition-all duration-100"
               style={{
