@@ -78,9 +78,9 @@ const VSL = () => {
         </div>
 
         {!showCTA && (
-          <p className="text-xs text-muted-foreground">
-            Assista até o final para liberar sua vaga exclusiva...
-          </p>
+         <p className="text-xs text-muted-foreground">
+  Assista até o final para entender tudo...
+</p>
         )}
 
         {showCTA && (
