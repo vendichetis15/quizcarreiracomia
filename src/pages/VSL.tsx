@@ -139,8 +139,7 @@ const VSL = () => {
         {showArrow && (
           <button
             onClick={() => {
-              // Aqui você pode adicionar a ação desejada (redirecionar, abrir modal, etc)
-              console.log("CTA clicked");
+              window.location.href = "https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf";
             }}
             className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
           >
