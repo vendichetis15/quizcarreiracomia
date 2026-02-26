@@ -21,9 +21,8 @@ const ResultScreen = () => {
         <h2 className="text-2xl font-extrabold text-foreground">
           98% de Compatibilidade! ✅
         </h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">Com base nas suas respostas, você tem o perfil ideal para aplicar o método que gerou mais de 6 dígitos no Tiktok Shop sem contratar modelos reais.
-          <span className="text-primary font-semibold">perfil ideal</span> para
-          aplicar o método que gerou R$ 100 mil sem contratar modelos reais.
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Com base nas suas respostas, você tem o <span className="text-primary font-semibold">perfil ideal</span> para aplicar o método que gerou mais de 6 dígitos no Tiktok Shop sem contratar modelos reais.
         </p>
       </div>
 
