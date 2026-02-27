@@ -6,45 +6,47 @@ import ResultScreen from "@/components/ResultScreen";
 import { Bot } from "lucide-react";
 
 const questions = [
-{
-  id: 1,
-  title: "Conexão com o Criativo",
-  question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a que te trouxe até aqui?",
-  options: [
-  { label: "Sim, já estou acompanhando essa revolução." },
-  { label: "Não, fiquei impressionado com o realismo." },
-  { label: "Vi algo parecido, mas não sabia que era IA." }]
-
-},
-{
-  id: 2,
-  title: "Identificação da Dor",
-  question: "Qual o seu maior receio em relação ao avanço acelerado da IA no mercado de trabalho?",
-  options: [
-  { label: "Ser substituído e perder minha fonte de renda." },
-  { label: "Ficar estagnado enquanto outros ganham mais usando IA." },
-  { label: "Não conseguir aprender a tempo de me destacar." }]
-
-},
-{
-  id: 3,
-  title: "Qualificação de Desejo",
-  question: "Se você dominasse as ferramentas que automatizam 80% do seu trabalho hoje, o que você faria?",
-  options: [
-  { label: "Buscaria um cargo de liderança com salário maior." },
-  { label: "Criaria meu próprio negócio digital do zero." },
-  { label: "Prestaria serviços para empresas de fora ganhando em dólar." }]
-
-},
-{
-  id: 4,
-  title: "Micro-comprometimento",
-  question: "Você está disposto a dedicar 15 minutos agora para entender o método exato que gerou 6 digitos se precisar contratar modelos reais?",
-  options: [
-  { label: "Sim, quero o acesso imediato." },
-  { label: "Com certeza, não quero perder essa chance." }]
-
-}];
+  {
+    id: 1,
+    title: "Conexão com o Criativo",
+    question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a Nina ou Ju que te trouxe até aqui?",
+    options: [
+      { label: "Sim, já estou acompanhando essa revolução." },
+      { label: "Não, fiquei impressionado com o realismo." },
+      { label: "Vi algo parecido, mas não sabia que era IA." }
+    ]
+  },
+  {
+    id: 2,
+    title: "Identificação da Dor",
+    question: "O que mais te atrai em criar uma renda sem precisar aparecer na câmera?",
+    options: [
+      { label: "Ganhar 24 horas por dia sem trabalhar manualmente." },
+      { label: "Evitar exposição pessoal mas ganhar dinheiro." },
+      { label: "Escalar um negócio usando apenas IA e automação." }
+    ]
+  },
+  {
+    id: 3,
+    title: "Qualificação de Desejo",
+    question: "Em qual plataforma você gostaria de gerar renda com IA?",
+    options: [
+      { label: "TikTok Shop (já tem audiência lá)." },
+      { label: "Criando do absoluto zero com método validado." },
+      { label: "Nos dois - quanto maior o leque, melhor." }
+    ]
+  },
+  {
+    id: 4,
+    title: "Micro-comprometimento",
+    question: "Qual é seu objetivo realista para os próximos 30 dias?",
+    options: [
+      { label: "Gerar meu primeiro 1.000 reais com IA." },
+      { label: "Escalar para 10.000 reais mensais estáveis." },
+      { label: "Substituir meu salário completamente." }
+    ]
+  }
+];
 
 
 type Phase = "quiz" | "loading" | "result";
