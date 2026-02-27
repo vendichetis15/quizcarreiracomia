@@ -8,42 +8,42 @@ import { Bot } from "lucide-react";
 const questions = [
   {
     id: 1,
-    title: "Conexão com o Criativo",
-    question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a que está neste vídeo?",
+    title: "Descoberta",
+    question: "Você já havia considerado usar Inteligência Artificial como ferramenta para criar conteúdo?",
     options: [
-      { label: "Sim, já estou acompanhando essa revolução." },
-      { label: "Não, fiquei impressionado com o realismo." },
-      { label: "Vi algo parecido, mas não sabia que era IA." }
+      { label: "Sim, já estou explorando essas possibilidades." },
+      { label: "Não, mas fiquei interessado." },
+      { label: "Ouvi falar, mas não entendia bem como funciona." }
     ]
   },
   {
     id: 2,
-    title: "Identificação da Dor",
-    question: "O que mais te atrai em criar uma renda sem precisar aparecer na câmera?",
+    title: "Interesse",
+    question: "O que mais te chama atenção sobre as aplicações de IA?",
     options: [
-      { label: "Ganhar 24 horas por dia sem trabalhar manualmente." },
-      { label: "Evitar exposição pessoal mas ganhar dinheiro." },
-      { label: "Escalar um negócio usando apenas IA e automação." }
+      { label: "A capacidade de automatizar e ganhar tempo." },
+      { label: "Criar conteúdo sem aparecer e manter privacidade." },
+      { label: "Escalar estratégias digitais com menos esforço." }
     ]
   },
   {
     id: 3,
-    title: "Qualificação de Desejo",
-    question: "Qual é seu interesse principal com a estratégia do TikTok Shop?",
+    title: "Exploração",
+    question: "Dentre essas estratégias, qual mais te interessa conhecer?",
     options: [
-      { label: "Vender produtos com avatar IA no TikTok." },
-      { label: "Escalar rapidamente com o agente IA que criai vídeos." },
-      { label: "Começar do zero e gerar 10k+/mês garantido." }
+      { label: "Usar avatares IA para criar conteúdo." },
+      { label: "Automatizar a criação de vídeos em massa." },
+      { label: "Monetizar conteúdo de forma escalável." }
     ]
   },
   {
     id: 4,
-    title: "Micro-comprometimento",
-    question: "Qual é seu objetivo realista para os próximos 30 dias?",
+    title: "Intenção",
+    question: "Qual é seu principal objetivo ao aprender sobre essas estratégias?",
     options: [
-      { label: "Gerar meu primeiro 1.000 reais com IA." },
-      { label: "Escalar para 10.000 reais mensais estáveis." },
-      { label: "Substituir meu salário completamente." }
+      { label: "Entender como funciona na prática." },
+      { label: "Aplicar e testar em meus próprios projetos." },
+      { label: "Combinar com minha estratégia atual." }
     ]
   }
 ];
@@ -102,8 +102,8 @@ const Index = () => {
           <span className="text-xs font-bold text-primary tracking-widest uppercase">Diagnóstico de Carreira • 2026</span>
         </div>
         <h1 className="text-base font-bold text-foreground leading-snug mb-1">
-          Descubra em 30 segundos se você será substituído por IA ou se faz parte dos{" "}
-          <span className="text-primary">3% que vão lucrar alto</span> com ela.
+          Descubra seu perfil com IA e entenda como essa tecnologia está transformando as estratégias digitais em{" "}
+          <span className="text-primary">2026</span>.
         </h1>
         <div className="mt-4">
           <QuizProgress current={currentQ + 1} total={questions.length} />
