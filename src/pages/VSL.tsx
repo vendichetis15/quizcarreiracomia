@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 
+declare global {
+  interface Window {
+    smartplayer?: { instances?: any[] };
+  }
+}
+
 const VSL = () => {
   const [showCTA, setShowCTA] = useState(false);
 
@@ -29,6 +35,15 @@ const VSL = () => {
 
           player.on("finish", liberarCTA);
           player.on("complete", liberarCTA);
+          player.on("ended", liberarCTA);
+
+          // Fallback: escuta mensagens do iframe do SmartPlayer
+          const handleMessage = (event: MessageEvent) => {
+            if (event.data && (event.data.type === "ended" || event.data.type === "finish" || event.data.type === "complete" || event.data === "ended")) {
+              liberarCTA();
+            }
+          };
+          window.addEventListener("message", handleMessage);
         }
       }
     }, 500);

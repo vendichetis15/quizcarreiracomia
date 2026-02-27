@@ -2,6 +2,8 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizProgress from "@/components/QuizProgress";
 import QuizOption from "@/components/QuizOption";
+import LoadingScreen from "@/components/LoadingScreen";
+import ResultScreen from "@/components/ResultScreen";
 import { Bot } from "lucide-react";
 
 const questions = [
