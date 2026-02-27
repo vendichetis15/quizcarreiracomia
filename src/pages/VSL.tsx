@@ -116,7 +116,7 @@ const VSL = () => {
           <div style={{ paddingTop: "125%", position: "relative" }}>
             <video
               ref={videoRef}
-              src="https://drive.usercontent.google.com/u/0/uc?id=1BVIZp1Pc3nGmN5oWqRuuzD7ABZveGlXy&export=download"
+              src="https://drive.google.com/file/d/1BVIZp1Pc3nGmN5oWqRuuzD7ABZveGlXy/view"
               controls={false}
               autoPlay
               className="absolute top-0 left-0 w-full h-full rounded-2xl"
