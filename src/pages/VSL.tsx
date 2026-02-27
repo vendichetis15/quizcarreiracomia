@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+
+declare global {
+  interface Window {
+    smartplayer?: any;
+  }
+}
 
 const fakeClients = [
   "Mariana Souza",
@@ -27,9 +33,7 @@ const getRandomMinutesAgo = () => {
 };
 
 const VSL = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [showCTA, setShowCTA] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationData, setNotificationData] = useState({
     name: "",
@@ -37,29 +41,13 @@ const VSL = () => {
     time: "",
   });
 
-  // Atualiza progresso do vídeo e CTA
+  // Exibe botão após 30 segundos (30.000 ms)
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const timer = setTimeout(() => {
+      setShowArrow(true);
+    }, 30000);
 
-    const updateProgress = () => {
-      if (video.duration > 0) {
-        setProgress((video.currentTime / video.duration) * 100);
-      }
-    };
-
-    const showButton = () => {
-      setProgress(100);
-      setShowCTA(true);
-    };
-
-    video.addEventListener("timeupdate", updateProgress);
-    video.addEventListener("ended", showButton);
-
-    return () => {
-      video.removeEventListener("timeupdate", updateProgress);
-      video.removeEventListener("ended", showButton);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Sistema de notificações REALISTA
@@ -111,59 +99,42 @@ const VSL = () => {
           Mesmo começando do absoluto zero.
         </p>
 
-        {/* Player meio quadrado vertical (4:5) */}
-        <div className="w-full rounded-2xl overflow-visible border border-border relative max-w-sm mx-auto">
-          <div style={{ paddingTop: "125%", position: "relative" }}>
-            <video
-              ref={videoRef}
-              src="https://drive.google.com/file/d/1BVIZp1Pc3nGmN5oWqRuuzD7ABZveGlXy/view"
-              controls={false}
-              autoPlay
-              className="absolute top-0 left-0 w-full h-full rounded-2xl"
-            />
-          </div>
-
-          {/* Barra de progresso roxa */}
-          <div className="h-2 w-full bg-gray-300 rounded-b-xl mt-2 overflow-hidden">
-            <div
-              className="h-2 bg-purple-600 transition-all duration-200"
-              style={{ width: `${progress}%` }}
-            />
+        {/* Vídeo */}
+        <div className="w-full rounded-2xl overflow-visible border border-border relative">
+          <div
+            id="ifr_69963cfbe72b943e07e7b685_wrapper"
+            style={{ margin: "0 auto", width: "100%" }}
+          >
+            <div style={{ padding: "122% 0 0 0", position: "relative" }}>
+              <iframe
+                id="ifr_69963cfbe72b943e07e7b685"
+                src="https://scripts.converteai.net/5d9f8480-70ee-4640-ab7d-afc37958aa16/players/69963cfbe72b943e07e7b685/embed.html"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: "none",
+                }}
+                referrerPolicy="origin"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
 
-        {!showCTA && (
-          <p className="text-xs text-muted-foreground text-center mt-2">
+        {!showArrow && (
+          <p className="text-xs text-muted-foreground text-center">
             Vídeo em reprodução...
           </p>
         )}
 
-        {showCTA && (
-          <>
-            <div className="flex flex-col items-center gap-2 mt-4">
-              <div className="animate-bounce">
-                <svg
-                  className="w-8 h-8 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
-                </svg>
-              </div>
-            </div>
-            <button
-              onClick={() => console.log("CTA clicked")}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
-            >
-              GARANTIR MINHA VAGA AGORA
-            </button>
-          </>
+        {showArrow && (
+          <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
+            GARANTIR MINHA VAGA AGORA
+          </button>
         )}
       </div>
 
