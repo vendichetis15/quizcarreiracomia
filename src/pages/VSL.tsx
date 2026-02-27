@@ -77,7 +77,7 @@ const VSL = () => {
 
   // Verifica localStorage ao montar o componente
   useEffect(() => {
-    const saved = localStorage.getItem("vsl_watched_5min");
+    const saved = localStorage.getItem("vsl_watched_6min30");
     if (saved === "true") {
       console.log("CTA ja foi assistido, mostrando agora");
       setVideoWatched(true);
@@ -89,10 +89,10 @@ const VSL = () => {
     const interval = setInterval(() => {
       setCurrentTime((prev) => {
         const newTime = prev + 1;
-        // Quando chegar aos 5 minutos, salva no localStorage
-        if (newTime >= 300 && !videoWatched) {
-          console.log("Chegou aos 5 minutos! Salvando no localStorage");
-          localStorage.setItem("vsl_watched_5min", "true");
+        // Quando chegar aos 6 minutos e 30 segundos (390s), salva no localStorage
+        if (newTime >= 390 && !videoWatched) {
+          console.log("Chegou aos 6:30 minutos! Salvando no localStorage");
+          localStorage.setItem("vsl_watched_6min30", "true");
           setVideoWatched(true);
         }
         return newTime;
@@ -102,8 +102,8 @@ const VSL = () => {
     return () => clearInterval(interval);
   }, [videoWatched]);
 
-  // CTA aparece se já assistiu 5 minutos (do localStorage) ou ao atingir 300s
-  const shouldShowCTA = videoWatched || currentTime >= 300;
+  // CTA aparece se já assistiu 6:30 minutos (do localStorage) ou ao atingir 390s
+  const shouldShowCTA = videoWatched || currentTime >= 390;
 
   // Sistema de notificações REALISTA
   useEffect(() => {
