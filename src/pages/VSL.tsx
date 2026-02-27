@@ -43,9 +43,18 @@ const VSL = () => {
     time: "",
   });
 
+  // tenta tocar automaticamente quando o componente monta
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current
+        .play()
+        .catch((err) => console.warn("não foi possível iniciar vídeo:", err));
+    }
+  }, []);
+
   const handleEnableAudio = () => {
     setMuted(false);
-    videoRef.current?.play();
+    videoRef.current?.play().catch((err) => console.warn(err));
   };
 
   const handleEnded = () => {
@@ -101,17 +110,21 @@ const VSL = () => {
           Mesmo começando do absoluto zero.
         </p>
 
-        {/* Vídeo local com controle de áudio e CTA */}
-        <div className="w-full max-w-sm rounded-2xl overflow-hidden border border-border relative aspect-w-3 aspect-h-4">
+        {/* Vídeo local com controle de áudio e CTA (retrato 9:16) */}
+        <div
+          className="w-full max-w-xs rounded-2xl overflow-hidden border border-border relative"
+          style={{ paddingTop: "177.78%" }} // 16/9 -> altura maior que largura
+        >
           <video
             ref={videoRef}
-            className="w-full h-full object-cover"
-            // utilize o nome real do arquivo na pasta public (espaços codificados)
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            // recomenda renomear o arquivo para evitar espaços, ou codificar como abaixo
             src="/vsl%20TTKSHOP.mp4"
             muted={muted}
             autoPlay
             playsInline
             onEnded={handleEnded}
+            onError={(e) => console.error("erro no vídeo", e)}
             controls={false}
           />
           {muted && (
