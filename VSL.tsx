@@ -1,9 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 const VSL = () => {
   const [showArrow, setShowArrow] = useState(false);
   const [progress, setProgress] = useState(0);
-  const showArrowRef = useRef(false);
 
   useEffect(() => {
     // Load the Converte AI smart player script
@@ -16,22 +15,20 @@ const VSL = () => {
     const startTime = Date.now();
     const totalDuration = 679000; // 11:19 em ms
     const acceleratedPhase = 180000; // Primeiros 3 minutos
-    const ctaShowTime = 30000; // 30 segundos em ms
 
     // Atualizar progresso a cada 100ms
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
 
-      // Mostrar CTA após 30 segundos (apenas uma vez)
-      if (elapsed >= ctaShowTime && !showArrowRef.current) {
-        showArrowRef.current = true;
-        setShowArrow(true);
-      }
-
+      // Mostrar CTA apenas quando o vídeo finalizar (11:19)
       if (elapsed >= totalDuration) {
         setProgress(100);
+        setShowArrow(true);
         clearInterval(interval);
-      } else if (elapsed <= acceleratedPhase) {
+        return;
+      }
+
+      if (elapsed <= acceleratedPhase) {
         // Primeiros 3 minutos: progride rápido até 45%
         const acceleratedProgress = (elapsed / acceleratedPhase) * 45;
         setProgress(acceleratedProgress);
@@ -99,13 +96,10 @@ const VSL = () => {
           </div>
         </div>
 
-        {/* Progress Bar while video is playing */}
+        {/* Mensagem enquanto o vídeo está em reprodução (sem opção manual) */}
         {!showArrow && (
           <div className="flex flex-col items-center gap-3">
             <p className="text-xs text-muted-foreground text-center">Vídeo em reprodução...</p>
-            <button onClick={() => setShowArrow(true)} className="text-xs text-primary hover:text-primary/80 underline">
-              Já assisti, quero garantir minha vaga agora...
-            </button>
           </div>
         )}
 
@@ -121,7 +115,7 @@ const VSL = () => {
           </div>
         )}
 
-        {/* CTA Button */}
+        {/* CTA Button (aparece somente ao final) */}
         {showArrow && (
           <button
             onClick={() => {
