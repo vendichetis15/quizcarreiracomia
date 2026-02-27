@@ -44,6 +44,11 @@ const VSL = () => {
             }
           };
           window.addEventListener("message", handleMessage);
+
+          // Fallback timer: 11min19s = 679 segundos
+          setTimeout(() => {
+            liberarCTA();
+          }, 679000);
         }
       }
     }, 500);
