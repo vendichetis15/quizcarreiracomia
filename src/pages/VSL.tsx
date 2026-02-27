@@ -6,6 +6,31 @@ declare global {
   }
 }
 
+// Estilos CSS para animação de pulse
+const pulseStyle = `
+  @keyframes pulse-btn {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+  }
+  
+  .pulse-btn {
+    animation: pulse-btn 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+`;
+
+// Injetar CSS de animação
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = pulseStyle;
+  document.head.appendChild(style);
+}
+
 const fakeClients = [
   "Mariana Souza",
   "Carlos Henrique",
@@ -34,6 +59,13 @@ const getRandomMinutesAgo = () => {
 
 const VSL = () => {
   const [currentTime, setCurrentTime] = useState(0);
+  const [videoWatched, setVideoWatched] = useState(() => {
+    // Verifica se já assistiu 5 minutos (salvo em localStorage)
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("vsl_watched_5min") === "true";
+    }
+    return false;
+  });
   const [showNotification, setShowNotification] = useState(false);
   const [notificationData, setNotificationData] = useState({
     name: "",
@@ -44,14 +76,22 @@ const VSL = () => {
   // Timer que atualiza a cada segundo
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime((prev) => prev + 1);
+      setCurrentTime((prev) => {
+        const newTime = prev + 1;
+        // Quando chegar aos 5 minutos, salva no localStorage
+        if (newTime >= 300 && !videoWatched) {
+          localStorage.setItem("vsl_watched_5min", "true");
+          setVideoWatched(true);
+        }
+        return newTime;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [videoWatched]);
 
-  // CTA aparece a partir dos 5 minutos (300 segundos)
-  const shouldShowCTA = currentTime >= 300;
+  // CTA aparece se já assistiu 5 minutos (do localStorage) ou ao atingir 300s
+  const shouldShowCTA = videoWatched || currentTime >= 300;
 
   // Sistema de notificações REALISTA
   useEffect(() => {
@@ -143,12 +183,22 @@ const VSL = () => {
         )}
 
         {shouldShowCTA && (
-          <button
-            onClick={() => window.location.href = "https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf"}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
-          >
-            GARANTIR MINHA VAGA AGORA
-          </button>
+          <div className="w-full space-y-3">
+            {/* Setinha apontando para o botão */}
+            <div className="flex justify-center">
+              <div className="animate-bounce">
+                <span className="text-primary text-2xl">↓</span>
+              </div>
+            </div>
+            
+            {/* Botão CTA com pulse */}
+            <button
+              onClick={() => window.location.href = "https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf"}
+              className="pulse-btn w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
+            >
+              GARANTIR MINHA VAGA AGORA
+            </button>
+          </div>
         )}
       </div>
 
