@@ -62,7 +62,9 @@ const VSL = () => {
   const [videoWatched, setVideoWatched] = useState(() => {
     // Verifica se já assistiu 5 minutos (salvo em localStorage)
     if (typeof window !== "undefined") {
-      return localStorage.getItem("vsl_watched_5min") === "true";
+      const saved = localStorage.getItem("vsl_watched_5min");
+      console.log("localStorage recuperado:", saved);
+      return saved === "true";
     }
     return false;
   });
@@ -73,6 +75,15 @@ const VSL = () => {
     time: "",
   });
 
+  // Verifica localStorage ao montar o componente
+  useEffect(() => {
+    const saved = localStorage.getItem("vsl_watched_5min");
+    if (saved === "true") {
+      console.log("CTA ja foi assistido, mostrando agora");
+      setVideoWatched(true);
+    }
+  }, []);
+
   // Timer que atualiza a cada segundo
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,6 +91,7 @@ const VSL = () => {
         const newTime = prev + 1;
         // Quando chegar aos 5 minutos, salva no localStorage
         if (newTime >= 300 && !videoWatched) {
+          console.log("Chegou aos 5 minutos! Salvando no localStorage");
           localStorage.setItem("vsl_watched_5min", "true");
           setVideoWatched(true);
         }
