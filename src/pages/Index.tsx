@@ -9,7 +9,7 @@ const questions = [
   {
     id: 1,
     title: "Conexão com o Criativo",
-    question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a Nina ou Ju que te trouxe até aqui?",
+    question: "Você já tinha visto uma Inteligência Artificial tão realista quanto a que está neste vídeo?",
     options: [
       { label: "Sim, já estou acompanhando essa revolução." },
       { label: "Não, fiquei impressionado com o realismo." },
@@ -29,11 +29,11 @@ const questions = [
   {
     id: 3,
     title: "Qualificação de Desejo",
-    question: "Em qual plataforma você gostaria de gerar renda com IA?",
+    question: "Qual é seu interesse principal com a estratégia do TikTok Shop?",
     options: [
-      { label: "TikTok Shop (já tem audiência lá)." },
-      { label: "Criando do absoluto zero com método validado." },
-      { label: "Nos dois - quanto maior o leque, melhor." }
+      { label: "Vender produtos com avatar IA no TikTok." },
+      { label: "Escalar rapidamente com o agente IA que criai vídeos." },
+      { label: "Começar do zero e gerar 10k+/mês garantido." }
     ]
   },
   {
