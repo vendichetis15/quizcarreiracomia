@@ -41,11 +41,11 @@ const VSL = () => {
     time: "",
   });
 
-  // Exibe botão após 30 segundos (30.000 ms)
+  // Exibe botão + setinha após 10 minutos (600.000 ms)
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowArrow(true);
-    }, 30000);
+    }, 600000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -132,9 +132,28 @@ const VSL = () => {
         )}
 
         {showArrow && (
-          <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
-            GARANTIR MINHA VAGA AGORA
-          </button>
+          <>
+            <div className="flex flex-col items-center gap-2">
+              <div className="animate-bounce">
+                <svg
+                  className="w-8 h-8 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </div>
+            </div>
+            <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
+              GARANTIR MINHA VAGA AGORA
+            </button>
+          </>
         )}
       </div>
 
