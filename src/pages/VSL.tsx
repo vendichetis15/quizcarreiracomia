@@ -1,24 +1,43 @@
 import { useEffect, useState } from "react";
 
+declare global {
+  interface Window {
+    smartplayer?: any;
+  }
+}
+
 const VSL = () => {
   const [showArrow, setShowArrow] = useState(false);
 
   useEffect(() => {
-    // Load the Converte AI smart player script
+    // Load ConverteAI Smart Player script
     const script = document.createElement("script");
     script.src =
       "https://scripts.converteai.net/5d9f8480-70ee-4640-ab7d-afc37958aa16/players/69963cfbe72b943e07e7b685/v4/player.js";
     script.async = true;
     document.head.appendChild(script);
 
-    // Mostrar CTA após 30 segundos
-    const timer = setTimeout(() => {
-      setShowArrow(true);
-    }, 30000); // 30s
+    script.onload = () => {
+      const checkPlayer = setInterval(() => {
+        if (
+          window.smartplayer &&
+          window.smartplayer.instances &&
+          window.smartplayer.instances.length > 0
+        ) {
+          const player = window.smartplayer.instances[0];
+
+          // Evento quando o vídeo termina
+          player.on("ended", () => {
+            setShowArrow(true);
+          });
+
+          clearInterval(checkPlayer);
+        }
+      }, 500);
+    };
 
     return () => {
       document.head.removeChild(script);
-      clearTimeout(timer);
     };
   }, []);
 
@@ -66,7 +85,7 @@ const VSL = () => {
           </div>
         </div>
 
-        {/* Enquanto não passou 30s */}
+        {/* Enquanto o vídeo não termina */}
         {!showArrow && (
           <div className="flex flex-col items-center gap-3">
             <p className="text-xs text-muted-foreground text-center">
@@ -75,40 +94,39 @@ const VSL = () => {
           </div>
         )}
 
-        {/* Seta + Texto */}
+        {/* Após finalizar o vídeo */}
         {showArrow && (
-          <div className="flex flex-col items-center gap-2">
-            <div className="animate-bounce">
-              <svg
-                className="w-8 h-8 text-primary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
+          <>
+            <div className="flex flex-col items-center gap-2">
+              <div className="animate-bounce">
+                <svg
+                  className="w-8 h-8 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </div>
+              <p className="text-sm text-muted-foreground font-medium">
+                Clique abaixo para garantir sua vaga
+              </p>
             </div>
-            <p className="text-sm text-muted-foreground font-medium">
-              Clique abaixo para garantir sua vaga
-            </p>
-          </div>
-        )}
 
-        {/* CTA */}
-        {showArrow && (
-          <button
-            onClick={() => {
-              console.log("CTA clicked");
-            }}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
-          >
-            GARANTIR MINHA VAGA AGORA
-          </button>
+            <button
+              onClick={() => {
+                console.log("CTA clicked");
+              }}
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
+            >
+              GARANTIR MINHA VAGA AGORA
+            </button>
+          </>
         )}
       </div>
     </div>
