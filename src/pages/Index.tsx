@@ -9,41 +9,41 @@ const questions = [
   {
     id: 1,
     title: "Descoberta",
-    question: "Você já havia considerado usar Inteligência Artificial como ferramenta para criar conteúdo?",
+    question: "Você já viu influencers criados 100% com IA vendendo e gerando receita de forma passiva?",
     options: [
-      { label: "Sim, já estou explorando essas possibilidades." },
-      { label: "Não, mas fiquei interessado." },
-      { label: "Ouvi falar, mas não entendia bem como funciona." }
+      { label: "Sim, já vi casos assim funcionando." },
+      { label: "Não, mas achei surpreendente." },
+      { label: "Ouvi falar, mas não acreditava ser possível." }
     ]
   },
   {
     id: 2,
     title: "Interesse",
-    question: "O que mais te chama atenção sobre as aplicações de IA?",
+    question: "O que mais chamou sua atenção nesse novo modelo?",
     options: [
-      { label: "A capacidade de automatizar e ganhar tempo." },
-      { label: "Criar conteúdo sem aparecer e manter privacidade." },
-      { label: "Escalar estratégias digitais com menos esforço." }
+      { label: "O fato de não precisar aparecer na câmera." },
+      { label: "A capacidade de escalar sem parar pra descansar." },
+      { label: "A possibilidade de ganhar enquanto dorme." }
     ]
   },
   {
     id: 3,
     title: "Exploração",
-    question: "Dentre essas estratégias, qual mais te interessa conhecer?",
+    question: "Se tivesse acesso ao método que fazem isso, o que você tentaria?",
     options: [
-      { label: "Usar avatares IA para criar conteúdo." },
-      { label: "Automatizar a criação de vídeos em massa." },
-      { label: "Monetizar conteúdo de forma escalável." }
+      { label: "Replicar exatamente como estão fazendo." },
+      { label: "Adaptar para minha audiência atual." },
+      { label: "Testar em pequena escala primeiro." }
     ]
   },
   {
     id: 4,
     title: "Intenção",
-    question: "Qual é seu principal objetivo ao aprender sobre essas estratégias?",
+    question: "Qual é seu maior curiosidade sobre essa estratégia?",
     options: [
-      { label: "Entender como funciona na prática." },
-      { label: "Aplicar e testar em meus próprios projetos." },
-      { label: "Combinar com minha estratégia atual." }
+      { label: "Como criar avatares que parecem reais." },
+      { label: "Qual plataforma lucrativa é melhor começar." },
+      { label: "Se realmente existe garantia de resultado." }
     ]
   }
 ];
@@ -102,8 +102,8 @@ const Index = () => {
           <span className="text-xs font-bold text-primary tracking-widest uppercase">Diagnóstico de Carreira • 2026</span>
         </div>
         <h1 className="text-base font-bold text-foreground leading-snug mb-1">
-          Descubra seu perfil com IA e entenda como essa tecnologia está transformando as estratégias digitais em{" "}
-          <span className="text-primary">2026</span>.
+          Descubra seu perfil com IA e entenda por que{" "}
+          <span className="text-primary">milhares de criadores</span> estão mudando de estratégia em 2026.
         </h1>
         <div className="mt-4">
           <QuizProgress current={currentQ + 1} total={questions.length} />
