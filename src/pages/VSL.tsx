@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 declare global {
   interface Window {
@@ -33,9 +33,7 @@ const getRandomMinutesAgo = () => {
 };
 
 const VSL = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
-  const [showCTA, setShowCTA] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationData, setNotificationData] = useState({
     name: "",
@@ -43,23 +41,14 @@ const VSL = () => {
     time: "",
   });
 
-  // tenta tocar automaticamente quando o componente monta
+  // Exibe botão após 30 segundos (30.000 ms)
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current
-        .play()
-        .catch((err) => console.warn("não foi possível iniciar vídeo:", err));
-    }
+    const timer = setTimeout(() => {
+      setShowArrow(true);
+    }, 30000);
+
+    return () => clearTimeout(timer);
   }, []);
-
-  const handleEnableAudio = () => {
-    setMuted(false);
-    videoRef.current?.play().catch((err) => console.warn(err));
-  };
-
-  const handleEnded = () => {
-    setShowCTA(true);
-  };
 
   // Sistema de notificações REALISTA
   useEffect(() => {
@@ -110,40 +99,39 @@ const VSL = () => {
           Mesmo começando do absoluto zero.
         </p>
 
-        {/* Vídeo local com controle de áudio e CTA (retrato 9:16) */}
-        <div
-          className="w-full max-w-xs rounded-2xl overflow-hidden border border-border relative"
-          style={{ paddingTop: "177.78%" }} // 16/9 -> altura maior que largura
-        >
-          <video
-            ref={videoRef}
-            className="absolute top-0 left-0 w-full h-full object-cover"
-            // recomenda renomear o arquivo para evitar espaços, ou codificar como abaixo
-            src="/vsl%20TTKSHOP.mp4"
-            muted={muted}
-            autoPlay
-            playsInline
-            onEnded={handleEnded}
-            onError={(e) => console.error("erro no vídeo", e)}
-            controls={false}
-          />
-          {muted && (
-            <button
-              onClick={handleEnableAudio}
-              className="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold"
-            >
-              Soltar áudio ▶
-            </button>
-          )}
+        {/* Vídeo */}
+        <div className="w-full rounded-2xl overflow-visible border border-border relative">
+          <div
+            id="ifr_69963cfbe72b943e07e7b685_wrapper"
+            style={{ margin: "0 auto", width: "100%" }}
+          >
+            <div style={{ padding: "122% 0 0 0", position: "relative" }}>
+              <iframe
+                id="ifr_69963cfbe72b943e07e7b685"
+                src="https://scripts.converteai.net/5d9f8480-70ee-4640-ab7d-afc37958aa16/players/69963cfbe72b943e07e7b685/embed.html"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: "none",
+                }}
+                referrerPolicy="origin"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+              />
+            </div>
+          </div>
         </div>
 
-        {!showCTA && (
+        {!showArrow && (
           <p className="text-xs text-muted-foreground text-center">
             Vídeo em reprodução...
           </p>
         )}
 
-        {showCTA && (
+        {showArrow && (
           <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
             GARANTIR MINHA VAGA AGORA
           </button>
