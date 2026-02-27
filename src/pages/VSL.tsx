@@ -41,7 +41,7 @@ const VSL = () => {
     time: "",
   });
 
-  // CTA somente ao finalizar o vídeo
+  // CTA aos 11:19 do vídeo
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -57,9 +57,16 @@ const VSL = () => {
           window.smartplayer.instances.length > 0
         ) {
           const player = window.smartplayer.instances[0];
+          let alreadyShown = false;
 
-          player.on("ended", () => {
-            setShowArrow(true);
+          // Evento de atualização de tempo do vídeo
+          player.on("timeupdate", () => {
+            const currentTime = player.currentTime || player.video?.currentTime || 0;
+
+            if (currentTime >= 679 && !alreadyShown) { // 11:19 = 679s
+              alreadyShown = true;
+              setShowArrow(true);
+            }
           });
 
           clearInterval(checkPlayer);
