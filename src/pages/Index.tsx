@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import QuizProgress from "@/components/QuizProgress";
 import QuizOption from "@/components/QuizOption";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -55,6 +55,20 @@ const Index = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(new Array(questions.length).fill(null));
   const [phase, setPhase] = useState<Phase>("quiz");
+
+  // Captura e salva UTMs no sessionStorage
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const params = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src"];
+    
+    params.forEach((param) => {
+      const value = urlParams.get(param);
+      if (value) {
+        sessionStorage.setItem(param, value);
+        console.log(`✅ Salvou ${param}: ${value}`);
+      }
+    });
+  }, []);
 
   const selectAnswer = (optIndex: number) => {
     const newAnswers = [...answers];
