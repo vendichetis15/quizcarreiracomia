@@ -106,7 +106,6 @@ const VSL = () => {
               onClick={() => setShowArrow(true)}
               className="text-xs text-primary hover:text-primary/80 underline"
             >
-              Já assisti, quero garantir minha vaga agora...
             </button>
           </div>
         )}
