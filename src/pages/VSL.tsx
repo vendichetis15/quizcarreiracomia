@@ -210,7 +210,23 @@ const VSL = () => {
             
             {/* Botão CTA com pulse */}
             <button
-              onClick={() => window.location.href = "https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf"}
+              onClick={() => {
+                const baseUrl = "https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf";
+                const url = new URL(baseUrl);
+                
+                // Injeta UTMs do sessionStorage
+                const params = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "src"];
+                params.forEach((param) => {
+                  const value = sessionStorage.getItem(param);
+                  if (value) {
+                    url.searchParams.set(param, value);
+                    console.log(`🚀 Injetando ${param}: ${value}`);
+                  }
+                });
+                
+                console.log("✅ URL Final:", url.toString());
+                window.location.href = url.toString();
+              }}
               className="pulse-btn w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
             >
               GARANTIR MINHA VAGA AGORA
