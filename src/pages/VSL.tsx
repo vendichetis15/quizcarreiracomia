@@ -14,14 +14,19 @@ const VSL = () => {
     const startTime = Date.now();
     const totalDuration = 679000; // 11:19 em ms
     const acceleratedPhase = 180000; // Primeiros 3 minutos
+    const ctaShowTime = 30000; // 30 segundos em ms
 
     // Atualizar progresso a cada 100ms
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       
+      // Mostrar CTA após 30 segundos
+      if (elapsed >= ctaShowTime && !showArrow) {
+        setShowArrow(true);
+      }
+
       if (elapsed >= totalDuration) {
         setProgress(100);
-        setShowArrow(true);
         clearInterval(interval);
       } else if (elapsed <= acceleratedPhase) {
         // Primeiros 3 minutos: progride rápido até 45%
@@ -40,7 +45,7 @@ const VSL = () => {
       document.head.removeChild(script);
       clearInterval(interval);
     };
-  }, []);
+  }, [showArrow]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-start px-4 py-10 animate-fade-in">
@@ -106,6 +111,7 @@ const VSL = () => {
               onClick={() => setShowArrow(true)}
               className="text-xs text-primary hover:text-primary/80 underline"
             >
+              Já assisti, quero garantir minha vaga agora...
             </button>
           </div>
         )}
