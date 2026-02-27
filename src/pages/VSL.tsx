@@ -41,42 +41,13 @@ const VSL = () => {
     time: "",
   });
 
-  // CTA aos 11:19 do vídeo
+  // Exibe botão após 30 segundos (30.000 ms)
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://scripts.converteai.net/5d9f8480-70ee-4640-ab7d-afc37958aa16/players/69963cfbe72b943e07e7b685/v4/player.js";
-    script.async = true;
-    document.head.appendChild(script);
+    const timer = setTimeout(() => {
+      setShowArrow(true);
+    }, 30000);
 
-    script.onload = () => {
-      const checkPlayer = setInterval(() => {
-        if (
-          window.smartplayer &&
-          window.smartplayer.instances &&
-          window.smartplayer.instances.length > 0
-        ) {
-          const player = window.smartplayer.instances[0];
-          let alreadyShown = false;
-
-          // Evento de atualização de tempo do vídeo
-          player.on("timeupdate", () => {
-            const currentTime = player.currentTime || player.video?.currentTime || 0;
-
-            if (currentTime >= 679 && !alreadyShown) { // 11:19 = 679s
-              alreadyShown = true;
-              setShowArrow(true);
-            }
-          });
-
-          clearInterval(checkPlayer);
-        }
-      }, 500);
-    };
-
-    return () => {
-      document.head.removeChild(script);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Sistema de notificações REALISTA
@@ -94,16 +65,14 @@ const VSL = () => {
 
       setTimeout(() => {
         setShowNotification(false);
-      }, 6000); // visível por 6s
+      }, 6000);
 
-      // Próxima notificação em intervalo variável (70s a 110s)
       timeout = setTimeout(
         showRandomNotification,
         getRandomDelay(70000, 110000)
       );
     };
 
-    // Primeira notificação entre 45s e 75s
     timeout = setTimeout(
       showRandomNotification,
       getRandomDelay(45000, 75000)
