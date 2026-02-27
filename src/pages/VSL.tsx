@@ -33,7 +33,7 @@ const getRandomMinutesAgo = () => {
 };
 
 const VSL = () => {
-  const [showArrow, setShowArrow] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationData, setNotificationData] = useState({
     name: "",
@@ -41,14 +41,17 @@ const VSL = () => {
     time: "",
   });
 
-  // Exibe botão após 30 segundos (30.000 ms)
+  // Timer que atualiza a cada segundo
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowArrow(true);
-    }, 30000);
+    const interval = setInterval(() => {
+      setCurrentTime((prev) => prev + 1);
+    }, 1000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(interval);
   }, []);
+
+  // CTA aparece a partir dos 5 minutos (300 segundos)
+  const shouldShowCTA = currentTime >= 300;
 
   // Sistema de notificações REALISTA
   useEffect(() => {
@@ -99,8 +102,16 @@ const VSL = () => {
           Mesmo começando do absoluto zero.
         </p>
 
-        {/* Vídeo */}
-        <div className="w-full rounded-2xl overflow-visible border border-border relative">
+        {/* Vídeo com barra de progresso */}
+        <div className="w-full rounded-2xl overflow-hidden border border-border relative">
+          {/* Barra de progresso no topo */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gray-700 z-10">
+            <div
+              className="h-full bg-primary transition-all duration-200"
+              style={{ width: `${Math.min((currentTime / 300) * 100, 100)}%` }}
+            />
+          </div>
+
           <div
             id="ifr_69963cfbe72b943e07e7b685_wrapper"
             style={{ margin: "0 auto", width: "100%" }}
@@ -125,13 +136,13 @@ const VSL = () => {
           </div>
         </div>
 
-        {!showArrow && (
+        {!shouldShowCTA && (
           <p className="text-xs text-muted-foreground text-center">
             Vídeo em reprodução...
           </p>
         )}
 
-        {showArrow && (
+        {shouldShowCTA && (
           <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
             GARANTIR MINHA VAGA AGORA
           </button>
