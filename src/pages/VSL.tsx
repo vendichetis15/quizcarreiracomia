@@ -60,10 +60,11 @@ const getRandomMinutesAgo = () => {
 const VSL = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [videoWatched, setVideoWatched] = useState(() => {
-    // Verifica se já assistiu 5 minutos (salvo em localStorage)
+    // Limpa chave antiga pra não conflitar
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("vsl_watched_5min");
-      console.log("localStorage recuperado:", saved);
+      localStorage.removeItem("vsl_watched_5min");
+      const saved = localStorage.getItem("vsl_watched_6min30");
+      console.log("localStorage recuperado (6:30):", saved);
       return saved === "true";
     }
     return false;
@@ -89,9 +90,13 @@ const VSL = () => {
     const interval = setInterval(() => {
       setCurrentTime((prev) => {
         const newTime = prev + 1;
+        // Log a cada 30 segundos pra rastrear (evita spam)
+        if (newTime % 30 === 0) {
+          console.log(`⏱️ Tempo atual: ${newTime}s (${Math.floor(newTime / 60)}:${String(newTime % 60).padStart(2, "0")})`);
+        }
         // Quando chegar aos 6 minutos e 30 segundos (390s), salva no localStorage
         if (newTime >= 390 && !videoWatched) {
-          console.log("Chegou aos 6:30 minutos! Salvando no localStorage");
+          console.log("🎯 Chegou aos 6:30 minutos! Salvando no localStorage e mostrando CTA");
           localStorage.setItem("vsl_watched_6min30", "true");
           setVideoWatched(true);
         }
