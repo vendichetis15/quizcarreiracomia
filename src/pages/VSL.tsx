@@ -111,9 +111,9 @@ const VSL = () => {
           Mesmo começando do absoluto zero.
         </p>
 
-        {/* Player Vertical 9:16 */}
+        {/* Player meio quadrado vertical (4:5) */}
         <div className="w-full rounded-2xl overflow-visible border border-border relative max-w-sm mx-auto">
-          <div style={{ paddingTop: "177.78%", position: "relative" }}>
+          <div style={{ paddingTop: "125%", position: "relative" }}>
             <video
               ref={videoRef}
               src="https://drive.usercontent.google.com/u/0/uc?id=1BVIZp1Pc3nGmN5oWqRuuzD7ABZveGlXy&export=download"
