@@ -102,11 +102,12 @@ const VSL = () => {
         </p>
 
         {/* Vídeo local com controle de áudio e CTA */}
-        <div className="w-full rounded-2xl overflow-visible border border-border relative">
+        <div className="w-full max-w-sm rounded-2xl overflow-hidden border border-border relative aspect-w-3 aspect-h-4">
           <video
             ref={videoRef}
-            className="w-full h-auto"
-            src="/vsl-ttkshop.mp4"
+            className="w-full h-full object-cover"
+            // utilize o nome real do arquivo na pasta public (espaços codificados)
+            src="/vsl%20TTKSHOP.mp4"
             muted={muted}
             autoPlay
             playsInline
