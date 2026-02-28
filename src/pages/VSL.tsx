@@ -156,8 +156,8 @@ const VSL = () => {
         </div>
 
         <h1 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
-          Veja como o <span className="text-primary">Motor de Vendas Automatizado</span> do Gabriel Morais gera{" "}
-          <span className="text-primary">R$ 10K/mês</span> sem aparecer
+          Veja como o <span className="text-primary">Motor de Vendas Automatizado</span> do Gabriel geram no mínimo{" "}
+          <span className="text-primary">10K/mês</span> sem aparecer
         </h1>
 
         <p className="text-base text-muted-foreground font-medium">
