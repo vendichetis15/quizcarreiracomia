@@ -144,18 +144,22 @@ const VSL = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-start px-4 py-10 animate-fade-in relative">
       <div className="w-full max-w-sm space-y-6 text-center">
+        {/* Badge Estudo de Caso */}
+        <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2 mx-auto">
+          <span className="text-xs font-bold text-primary tracking-widest uppercase">🔓 Estudo de Caso Desbloqueado</span>
+        </div>
+
         <h1 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight">
-          Seu perfil foi <span className="text-primary">aprovado</span> para o{" "}
-          <span className="text-primary">Plano 10K</span> em{" "}
-          <span className="text-primary">30 dias</span>
+          Veja como o <span className="text-primary">Motor de Vendas Automatizado</span> do Gabriel Morais gera{" "}
+          <span className="text-primary">R$ 10K/mês</span> sem aparecer
         </h1>
 
         <p className="text-base text-muted-foreground font-medium">
-          Sem aparecer. Sem nenhum risco.
+          ⚡ Nina e Ju (100% IA) vendem no TikTok Shop 24/7 sem parar.
         </p>
 
         <p className="text-sm text-muted-foreground">
-          Mesmo começando do absoluto zero.
+          Descubra a tecnologia por trás delas neste estudo de caso exclusivo.
         </p>
 
         {/* Vídeo com barra de progresso */}
@@ -199,7 +203,14 @@ const VSL = () => {
         )}
 
         {shouldShowCTA && (
-          <div className="w-full space-y-3">
+          <div className="w-full space-y-4">
+            {/* Texto Bridge */}
+            <div className="bg-card border border-border rounded-xl p-4 space-y-2">
+              <p className="text-sm text-foreground font-semibold">✅ Você acabou de ver a prova real de que isso funciona.</p>
+              <p className="text-xs text-muted-foreground">⚡ Agora Gabriel está abrindo acesso limitado para replicar o sistema completo.</p>
+              <p className="text-xs text-primary font-semibold">🎯 Clique abaixo para garantir sua vaga no Plano 10K antes que feche.</p>
+            </div>
+
             {/* Setinha apontando para o botão */}
             <div className="flex justify-center">
               <div className="animate-bounce">
@@ -228,7 +239,7 @@ const VSL = () => {
               }}
               className="pulse-btn w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
             >
-              GARANTIR MINHA VAGA AGORA
+              QUERO COPIAR O SISTEMA DO GABRIEL AGORA
             </button>
           </div>
         )}
@@ -241,7 +252,7 @@ const VSL = () => {
             {notificationData.name} de {notificationData.state}
           </p>
           <p className="text-xs">
-            acabou de se tornar um Criador de IAs • {notificationData.time}
+            acabou de ativar o Motor de Vendas do Gabriel • R$ 10K validado • {notificationData.time}
           </p>
         </div>
       )}
