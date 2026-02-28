@@ -83,6 +83,12 @@ const VSL = () => {
       console.log("CTA ja foi assistido, mostrando agora");
       setVideoWatched(true);
     }
+
+    // TikTok Pixel: VSL Viewed
+    if (typeof window !== 'undefined' && (window as any).ttq) {
+      (window as any).ttq.track('VSLViewed');
+      console.log('🎯 TikTok Event: VSLViewed');
+    }
   }, []);
 
   // Timer que atualiza a cada segundo
@@ -221,6 +227,16 @@ const VSL = () => {
             {/* Botão CTA com pulse */}
             <button
               onClick={() => {
+                // TikTok Pixel: CTA Clicked (Conversão)
+                if (typeof window !== 'undefined' && (window as any).ttq) {
+                  (window as any).ttq.track('ClickButton', {
+                    content_name: 'Plano 10K CTA',
+                    value: 10000,
+                    currency: 'BRL'
+                  });
+                  console.log('🎯 TikTok Event: ClickButton (CTA)');
+                }
+
                 const baseUrl = "https://pay.kiwify.com.br/vjjTIiE?afid=bCH5tjUf";
                 const url = new URL(baseUrl);
                 

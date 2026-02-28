@@ -68,6 +68,12 @@ const Index = () => {
         console.log(`✅ Salvou ${param}: ${value}`);
       }
     });
+
+    // TikTok Pixel: Quiz Started
+    if (typeof window !== 'undefined' && (window as any).ttq) {
+      (window as any).ttq.track('QuizStarted');
+      console.log('🎯 TikTok Event: QuizStarted');
+    }
   }, []);
 
   const selectAnswer = (optIndex: number) => {
@@ -81,6 +87,11 @@ const Index = () => {
     if (currentQ < questions.length - 1) {
       setCurrentQ(currentQ + 1);
     } else {
+      // TikTok Pixel: Quiz Completed
+      if (typeof window !== 'undefined' && (window as any).ttq) {
+        (window as any).ttq.track('QuizCompleted');
+        console.log('🎯 TikTok Event: QuizCompleted');
+      }
       setPhase("loading");
     }
   };
