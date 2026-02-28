@@ -5,9 +5,9 @@ interface LoadingScreenProps {
 }
 
 const steps = [
-  "Analisando suas respostas...",
-  "Verificando compatibilidade de mercado...",
-  "Cruzando dados com tendências de 2026...",
+  "Analisando perfil tecnológico...",
+  "Cruzando dados com a base de operações do Estrategista Gabriel Morais...",
+  "Verificando compatibilidade com o Plano 10K...",
   "RESULTADO: 98% de Compatibilidade encontrada!",
 ];
 

@@ -24,23 +24,20 @@ const ResultScreen = () => {
           98% de Compatibilidade! ✅
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Com base nas suas respostas, você tem o <span className="text-primary font-semibold">perfil ideal</span> para aplicar o método que gerou mais de 6 dígitos no Tiktok Shop sem contratar modelos reais.
+          Com base nas suas respostas, você tem o <span className="text-primary font-semibold">perfil ideal</span> para operar a tecnologia do estrategista Gabriel. Ele criou um motor de vendas para o TikTok Shop que roda 100% no automático, sem precisar de modelos reais.
         </p>
       </div>
 
-      {/* Depoimento */}
+      {/* Estudo de Caso */}
       <div className="w-full max-w-sm bg-card border border-border rounded-2xl p-5 space-y-3">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-primary" />
-          <span className="text-xs font-semibold text-primary uppercase tracking-wider">Depoimento</span>
+          <span className="text-xs font-semibold text-primary uppercase tracking-wider">[ ESTUDO DE CASO LIBERADO ]</span>
         </div>
-        <p className="text-sm text-foreground/90 leading-relaxed italic">"Eu até gerei uma boa grana no TikTok Shop, mas parei tudo para focar nessa nova tecnologia de Influenciadores IA. Veja por que..."
+        <p className="text-sm text-foreground/90 leading-relaxed">
+          No vídeo abaixo, você verá a <span className="font-semibold">Nina e a Ju</span> — duas influenciadoras 100% criadas por IA pelo Gabriel. Elas provam como o Plano 10K funciona nos bastidores de um podcast real. Assista e veja como copiar essa estrutura.
         </p>
       </div>
-
-      <p className="text-sm text-muted-foreground text-center max-w-xs">
-        Assista ao vídeo para liberar seu acesso ao <span className="text-primary font-semibold">método completo</span>.
-      </p>
 
       {showButton ?
       <>
@@ -49,7 +46,7 @@ const ResultScreen = () => {
             onClick={() => navigate("/vsl")}
             className="w-full max-w-sm py-4 rounded-2xl quiz-gradient text-primary-foreground font-extrabold text-lg tracking-wide glow-primary pulse-glow transition-transform active:scale-95 animate-fade-in"
           >
-            🟢 LIBERAR MEU ACESSO AGORA
+            ASSISTIR AO ESTUDO DE CASO AGORA
           </button>
           <p className="text-xs text-destructive/80 text-center font-semibold animate-fade-in">
             ⚠️ Este vídeo sairá do ar assim que as vagas da mentoria forem preenchidas.
